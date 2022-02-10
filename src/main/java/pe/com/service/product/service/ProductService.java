@@ -14,4 +14,7 @@ void createProduct(Product product);
     Mono<Product> updateProduct(Product product);
  
     Mono<Void> deleteProduct(String id);
+    
+    Flux<Product> findByClientId(String idClient);
+    
 }

@@ -22,5 +22,6 @@ public class Product {
     private String ccv;
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date createDate;
+    private String idClient;
 
 }

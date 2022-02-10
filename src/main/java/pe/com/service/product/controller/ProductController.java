@@ -56,6 +56,11 @@ public class ProductController {
 			productServiceImpl.deleteProduct(id).subscribe();
 		}
 	
+		@GetMapping("/client/{idCliente}")
+		public ResponseEntity<Flux<Product>> findClientById(@PathVariable("idCliente") String idCliente) {
+			Flux<Product> product = productServiceImpl.findByClientId(idCliente);
+			return new ResponseEntity<Flux<Product>>(product, product != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+		}
 	
 
 }
