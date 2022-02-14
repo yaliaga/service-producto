@@ -20,20 +20,13 @@ public class ProductServiceImpl implements ProductService {
 	WebClient webClient;
 
 	@Override
-	public void createProduct(Product product) {
-		productRepository.save(product).subscribe();
+	public Mono<Product> createProduct(Product product) {
+		return productRepository.save(product);
 
 	}
 
 	@Override
 	public Mono<Product> findByProductId(String id) {
-//		Mono<Product> mono = webClient
-//                .get()
-//                .uri("/product/{id}", id)
-//                .accept(MediaType.APPLICATION_JSON)
-//                .retrieve()
-//                .bodyToMono(Product.class);
-//		return mono;
 		return productRepository.findById(id);
 	}
 
@@ -56,6 +49,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Flux<Product> findByClientId(String idClient) {
 		return productRepository.findByIdClient(idClient);
+	}
+
+	@Override
+	public Mono<Product> saveClient(Product product) {
+		return productRepository.saveProduct(product);
 	}
 
 }

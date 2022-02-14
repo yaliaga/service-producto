@@ -29,8 +29,8 @@ public class ProductController {
 		
 		@PostMapping
 		@ResponseStatus(HttpStatus.CREATED)
-		public void createProduct(@RequestBody Product product) {
-			productServiceImpl.createProduct(product);
+		public Mono<Product> createProduct(@RequestBody Product product) {
+			return productServiceImpl.createProduct(product);
 		}
 
 		@GetMapping(value = "/all", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
@@ -60,6 +60,12 @@ public class ProductController {
 		public ResponseEntity<Flux<Product>> findClientById(@PathVariable("idCliente") String idCliente) {
 			Flux<Product> product = productServiceImpl.findByClientId(idCliente);
 			return new ResponseEntity<Flux<Product>>(product, product != null ? HttpStatus.OK : HttpStatus.NOT_FOUND);
+		}
+		
+		@PostMapping("/saveClients")
+		@ResponseStatus(HttpStatus.CREATED)
+		public Mono<Product> guardarCliente(@RequestBody Product product) {
+			return productServiceImpl.saveClient(product);
 		}
 	
 
